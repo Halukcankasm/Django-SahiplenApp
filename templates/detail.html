@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div class="row">
+    <div class="col-lg-8">
+        <!-- Post content-->
+        <article>
+            <!-- Post header-->
+            <header class="mb-4">
+                <!-- Post title-->
+                <h2 class="fw-bolder mb-1">{{article.title}}</h2>
+                <!-- Post meta content-->
+                <div class="text-muted fst-italic mb-2">{{article.created_date}}</div>
+                <!-- Post categories-->
+                <p class="badge bg-secondary text-decoration-none link-light">by {{article.author.username}}</p>
+                
+            </header>
+
+            <!-- Post image-->
+            {% if  article.article_image %}
+                <img class="img-fluid rounded" src="{{article.article_image.url}}" alt="">
+            {% else %}
+            {% endif %} 
+            
+            <!-- Post content-->
+            <section class="mb-5">
+                <hr>
+                <p class = "lead">
+                    {{article.content|safe}}
+                </p>
+                
+            </section>
+        </article>
+    </div>
+</div>
+
+{% endblock body %}

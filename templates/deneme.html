@@ -1,0 +1,88 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+
+<div class="jumbotron text-center">
+    <h1>Makaleler</h1>
+    <hr>
+</div>
+
+<form>
+{% csrf_token %}
+    <div class="input-group">
+        <div class="form-outline">
+            <input type="text" name="keyword"  class="form-control" placeholder="" />
+        </div>
+        <button type="sumbit" class="btn btn-primary">Search</button>
+    </div>
+</form>
+<br>
+
+
+{% if articles %}
+
+    {% for article in articles %}
+
+
+        <div class="ilan-tek age-4 type-1 gender-2 40 county-462  " data-category="age-4 gender-2 40 county-462 type-1 ">
+
+            {% if  article.article_image %}
+                <div class="ilan-resim">
+                    <img src="{{article.article_image.url}}">
+                </div>
+
+            {% endif %}
+
+            <div class="ilan-icerik">
+                <div class="ilan-baslik">
+                    {{article.title}}
+                </div>
+
+                <div class="alan mobil-hidden">
+                <p></p><p>Kahve tonlarındaki tavsanıma iyi bakabilecek bir yuva arıyorum
+                </p>
+                </div>
+                                            
+                <div class="alan">
+                    <div class="location destop-hidden">
+                        <i class="fa fa-map-marker" aria-hidden="true"></i>
+                        {{article.animal_city}}                                        
+                    </div>
+
+                    <div class="pet width-100">
+                        <i class="fa fa-paw" aria-hidden="true"></i>
+                        {{article.animal_type}}                                               
+                        <span>(Diğer)</span>
+                    </div>
+
+                    <div class="pet ">{{article.animal_age}}</div>
+                    <div class="pet ">{{article.animal_gender}}</div>
+                </div>
+
+                <div class="alan">
+                    <div class="location mobil-hidden">
+                        <i class="fa fa-map-marker" aria-hidden="true"></i>
+                        {{article.animal_city}}
+                    </div>
+                    <div class="date mobil-hidden">
+                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                        {{article.created_date}}                                        
+                    </div>
+                </div>
+                <!--<div class="ilan-no mobil-hidden">SA-3490</div> -->
+                <div class="ilan-tipi"> Sahip arıyor </div>
+            </div>
+        </div>
+    {% endfor %}
+
+{% else %}
+<br>
+<div class = "alert alert-danger"> 
+    Bu blogta böyle bir makale bulunmuyor
+</div>
+{% endif %}
+
+
+
+{% endblock body %}

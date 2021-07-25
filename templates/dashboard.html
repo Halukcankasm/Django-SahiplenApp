@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+    <h3>Profilim</h3>
+    <hr>
+    <p>
+        Hoşgeldiniz,<small class="badge bg-secondary text-decoration-none link-light" >{{request.user.username}}</small>
+    </p>
+    <hr>
+    <a class="btn btn-dark " href = "/articles/addarticle">İlan Ekle(+)</a>
+    <hr><br><br><br>
+
+    {% if articles %}
+        <table class="table jumbotron">
+            <thead>
+                <tr>
+                    <th scope="col">id</th>
+                    <th scope="col">Başlık</th>
+                    <th scope="col">Yazar</th>
+                    <th scope="col">Taarih</th>
+                    <th scope="col">Güncelle</th>
+                    <th scope="col">Sil</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for article in articles %}
+                    <tr>
+                        <th scope="row">{{article.id}}</th>
+                        <td><a href="/articles/article/{{article.id}}">{{article.title}}</a></td>
+                        <td>{{article.author.username}}</td>
+                        <td>{{article.created_date}}</td>
+                        <td><a href="/articles/update/{{article.id}}" class="btn btn-light ">Güncelle</a></td>
+                        <td><a href="/articles/delete/{{article.id}}" class="btn btn-light ">Sil</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>    
+    {% else %}
+        <div class = "alert alert-danger">Hünüz bir makaleniz bulunmuyor... </div>
+    {% endif %}    
+
+
+{% endblock body %}

@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div class="jumbotron text-center">
+    <h1>İlanlar</h1>
+    <hr>
+</div>
+
+<form>
+{% csrf_token %}
+    <div class="input-group">
+        <div class="form-outline">
+            <input type="text" name="keyword"  class="form-control" placeholder="" />
+        </div>
+        <button type="sumbit" class="btn btn-primary">Search</button>
+    </div>
+</form>
+<br>
+
+
+{% if articles %}
+    {% for article in articles %}
+        <hr>
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="row gx-4 gx-lg-5 align-items-center">
+
+                    {% if  article.article_image %}
+                    <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{article.article_image.url}}" alt="..." /></div>
+                    {% endif %}
+                    <div class="col-md-6">
+                        <div class="small mb-1">{{article.author.username}}</div>
+                        <div class="small mb-1">{{article.created_date}}</div>
+                        <h1 class="display-5 fw-bolder">{{article.title}}</h1>
+                        <div class="fs-5 mb-5">
+                            <span class="text-decoration-line-through">Yaş:{{article.animal_age}} |</span>
+                            <span>Cinsiyet:{{article.animal_gender}} |</span>
+                            <span>Tür:{{article.animal_type}} |</span>
+                            <span>Şehir:{{article.animal_city}}</span>
+                        </div>
+                        <p class="lead">{{article.content|safe|truncatewords:20}}</p>
+                        <div class="d-flex">
+                            <a href="/articles/article/{{article.id}}" class="btn btn-light">Devamını Oku...</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <hr>
+    {% endfor %}
+
+{% else %}
+<br>
+<div class = "alert alert-danger"> 
+    Bu blogta böyle bir makale bulunmuyor
+</div>
+{% endif %}
+
+{% endblock body %}

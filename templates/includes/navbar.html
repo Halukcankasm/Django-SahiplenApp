@@ -1,0 +1,43 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand" href="/">Sahiplen(dir)</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        
+        <ul class="navbar-nav mr-auto"> <!-- mr-auto = sola doğru yaslar-->
+          <li class="nav-item active">
+            <a class="nav-link" href="/about">Hakkımızda</a>
+          </li>
+
+          <li class="nav-item active">
+            <a class="nav-link" href="/articles">İlanlar</a>
+          </li>
+        </ul>
+
+
+        
+        <ul class="navbar-nav ml-auto">  <!-- ml-auto = sağa doğru yaslar-->
+        
+          {% if request.user.is_authenticated %}
+            <li class="nav-item active">
+                <a class="nav-link" href="/articles/dashboard">Profilim</a>
+            </li> 
+            <li class="nav-item active">
+                <a class="nav-link" href="/user/logout">ÇıkışYap</a>
+            </li>       
+          {% else %}
+            <li class="nav-item active">
+                <a class="nav-link" href="/user/login">GirişYap</a>
+            </li>
+          {% endif %}            
+            <li class="nav-item active">
+                <a class="nav-link" href="/user/register">KayıtOl</a>
+            </li>
+            
+        </ul> 
+
+   </div>
+
+</nav>
